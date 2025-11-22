@@ -10,25 +10,18 @@
     #ansible_user: "user"
     #ansible_password: "pass"
     
-  tasks:
+   tasks:
     - name: 📊 Executar 'display interface transceiver verbose'
       ansible.netcommon.cli_command:
         command: display interface transceiver verbose
       register: optical_output
       
-    # ------------------ NOVA TASK: ANÁLISE DE DADOS --------------------
-    # O comando VRP retorna muitos dados, vamos extrair o Rx Power
     - name: ✂️ Extrair o valor de Rx Power usando Regex
-      ansible.builtin.set_fact:
-        # Regex (Exemplo): Procura por "Rx Power" seguido por números e dBm
-        # O Regex pode precisar de ajuste dependendo da sua versão VRP
-        rx_power_match: "{{ optical_output.stdout[0] | regex_search('Rx Power\\s+:\\s+([-\\d\\.]+)\\s+dBm', '\\1') }}"
+      # Comente ou remova esta task por enquanto
+      # ansible.builtin.set_fact:
+      #   rx_power_match: "{{ optical_output.stdout[0] | regex_search('Rx Power\\s+:\\s+([-\\d\\.]+)\\s+dBm', '\\1') }}"
       
-    - name: 📋 Exibir o valor de Rx Power no console
+    - name: 📋 Exibir a SAÍDA BRUTA no console
       ansible.builtin.debug:
-        msg: |
-          ---
-          DISPOSITIVO: {{ inventory_hostname }}
-          STATUS: Coleta Concluída
-          RX POWER ENCONTRADO: {{ rx_power_match | default('NÃO ENCONTRADO') }} dBm
-          ---
+        # Imprime a saída completa sem o filtro de Regex
+        msg: "SAÍDA BRUTA do {{ inventory_hostname }}:\n{{ optical_output.stdout[0] }}"
