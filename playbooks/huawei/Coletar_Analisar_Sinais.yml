@@ -7,21 +7,24 @@
   # Variáveis de Conexão (Ajuste conforme seu ambiente)
   vars:
     ansible_network_os: community.network.cnos
-    #ansible_user: "user"
-    #ansible_password: "pass"
+    # Credenciais de conexão (Devem ser descomentadas ou fornecidas por credenciais AWX)
+    # ansible_user: "user" 
+    # ansible_password: "pass"
     
   tasks:
-   - name: 📊 Executar 'display interface transceiver verbose'
-     ansible.netcommon.cli_command:
-       command: display interface transceiver verbose
-     register: optical_output
+    - name: 📊 Executar 'display interface transceiver verbose'
+      ansible.netcommon.cli_command:
+        command: display interface transceiver verbose
+      register: optical_output
       
-   - name: ✂️ Extrair o valor de Rx Power usando Regex
-     # Comente ou remova esta task por enquanto
-     # ansible.builtin.set_fact:
-     #   rx_power_match: "{{ optical_output.stdout[0] | regex_search('Rx Power\\s+:\\s+([-\\d\\.]+)\\s+dBm', '\\1') }}"
+    - name: ✂️ Extrair o valor de Rx Power usando Regex (DESATIVADO)
+      # Esta task está DESATIVADA. Ela não causa erro de sintaxe, mas também não faz nada.
+      # Você deve ativá-la quando souber o Regex correto.
+      # Exemplo de como reativar:
+      # ansible.builtin.set_fact:
+      #   rx_power_match: "PENDENTE DE REGEX"
       
-   - name: 📋 Exibir a SAÍDA BRUTA no console
-     ansible.builtin.debug:
-       # Imprime a saída completa sem o filtro de Regex
-       msg: "SAÍDA BRUTA do {{ inventory_hostname }}:\n{{ optical_output.stdout[0] }}"
+    - name: 📋 Exibir a SAÍDA BRUTA no console
+      ansible.builtin.debug:
+        # A sintaxe para acessar a saída do comando é perfeita.
+        msg: "SAÍDA BRUTA do {{ inventory_hostname }}:\n{{ optical_output.stdout[0] }}"
