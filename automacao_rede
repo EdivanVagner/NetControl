@@ -1,0 +1,18 @@
+repo-automacao/
+│
+├── group_vars/
+│     ├── huawei.yml
+│     ├── mikrotik.yml
+│     └── cisco.yml
+│
+├── host_vars/
+│     └── olt-fh-rolim.yml
+│
+├── playbooks/
+│     ├── show_version.yml
+│     ├── huawei/
+│     │      └── alterar_descricao.yml
+│     └── mikrotik/
+│            └── alterar_vlan.yml
+│
+└── README.md
