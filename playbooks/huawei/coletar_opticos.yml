@@ -18,16 +18,16 @@
         # Este comando exibe todos os transceivers e suas informações detalhadas,
         # incluindo potência de transmissão (Tx) e recepção (Rx).
         command: display interface transceiver verbose
-    register: optical_output # Registra a saída do comando nesta variável
+   register: optical_output # Registra a saída do comando nesta variável
       
-    name: Salvar a saída de cada host em um arquivo local
-    ansible.builtin.copy:
+   name: Salvar a saída de cada host em um arquivo local
+   ansible.builtin.copy:
         content: "{{ optical_output.stdout[0] }}" # A saída do comando está no primeiro elemento da lista stdout
         dest: "./optica_saida/{{ inventory_hostname }}_optica.txt"
       # Cria o diretório de saída se ele não existir
       delegate_to: localhost
       run_once: true # Garante que o diretório de criação de arquivo local só rode uma vez
 
-    name: Exibir a saída da óptica no console (Opcional)
-    ansible.builtin.debug:
+   name: Exibir a saída da óptica no console (Opcional)
+   ansible.builtin.debug:
         msg: "Saída da óptica para {{ inventory_hostname }}:\n{{ optical_output.stdout[0] }}"
