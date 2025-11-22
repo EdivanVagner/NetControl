@@ -1,0 +1,6 @@
+---
+collections:
+  - name: ansible.netcommon
+    version: "2.5.0" # Use a versão mais recente ou uma que você sabe que funciona
+  - name: community.network # Recomendado para o ansible_network_os: community.network.cnos
+    version: "3.5.0"
