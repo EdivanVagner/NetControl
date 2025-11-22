@@ -18,7 +18,7 @@
         # Este comando exibe todos os transceivers e suas informações detalhadas,
         # incluindo potência de transmissão (Tx) e recepção (Rx).
         command: display interface transceiver verbose
-      register: optical_output # Registra a saída do comando nesta variável
+    register: optical_output # Registra a saída do comando nesta variável
       
     name: Salvar a saída de cada host em um arquivo local
     ansible.builtin.copy:
