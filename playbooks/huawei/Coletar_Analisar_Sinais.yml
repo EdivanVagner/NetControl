@@ -1,6 +1,6 @@
 ---
 - name: 🔍 Coletar e Analisar Sinais Ópticos (Rx) em Switches Huawei
-  hosts: huawei_switch
+  hosts: 10.0.92.0
   gather_facts: no
   connection: network_cli
   
