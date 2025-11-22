@@ -1,0 +1,19 @@
+- name: Coletar níveis ópticos em switches Huawei
+hosts: huawei_switch
+gather_facts: no
+collections:
+- community.network
+
+
+tasks:
+- name: Executar comando de ópticos
+community.network.ce_command:
+commands:
+- display transceiver interface
+register: optics
+
+
+- name: Salvar saída óptica
+copy:
+dest: "backups/huawei/optics/{{ inventory_hostname }}_optics.txt"
+content: "{{ optics.stdout[0] | default('') }}"
