@@ -1,4 +1,5 @@
-  name: 🔍 Coletar Informações do Transceiver (Óptica) em Switches Huawei
+---
+- name: 🔍 Coletar Informações do Transceiver (Óptica) em Switches Huawei
   hosts: huawei_switch
   gather_facts: no
   connection: network_cli
@@ -8,18 +9,23 @@
     ansible_network_os: community.network.cnos # Usado para o tipo de conexão VRP
     ansible_user: "AlphaSoares"
     ansible_password: "Soares99RS@"
-   ## ansible_become: yes
-   ## ansible_become_method: enable # Para entrar em modo privilegiado, se necessário
-   ## ansible_become_pass: "sua_senha_enable"
+    # Se precisar de modo privilegiado (enable) para executar o comando:
+    # ansible_become: yes
+    # ansible_become_method: enable
+    # ansible_become_pass: "sua_senha_enable"
     
   tasks:
-   name: Executar 'display interface transceiver verbose'
-   ansible.netcommon.cli_command:
-        # Este comando exibe todos os transceivers e suas informações detalhadas,
-        # incluindo potência de transmissão (Tx) e recepção (Rx).
+    # ------------------ PRIMEIRA TASK --------------------
+    # O traço (-) define uma nova task na lista
+    - name: 📊 Executar 'display interface transceiver verbose'
+      ansible.netcommon.cli_command:
+        # 'command' é um argumento do módulo, indentado corretamente
         command: display interface transceiver verbose
-   register: optical_output # Registra a saída do comando nesta variável
+      # 'register' é uma chave da task, alinhada com o módulo e o 'name'
+      register: optical_output 
       
-   name: Exibir a saída da óptica no console (Opcional)
-   ansible.builtin.debug:
+    # ------------------ SEGUNDA TASK --------------------
+    # Um novo traço (-) para a próxima task
+    - name: 📋 Exibir a saída da óptica no console (Opcional)
+      ansible.builtin.debug:
         msg: "Saída da óptica para {{ inventory_hostname }}:\n{{ optical_output.stdout[0] }}"
