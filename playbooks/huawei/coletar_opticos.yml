@@ -20,7 +20,7 @@
     - name: 📊 Executar 'display interface transceiver verbose'
       ansible.netcommon.cli_command:
         # 'command' é um argumento do módulo, indentado corretamente
-        command: display transceiver interface
+        command: display interface transceiver
       # 'register' é uma chave da task, alinhada com o módulo e o 'name'
       register: optical_output 
       
