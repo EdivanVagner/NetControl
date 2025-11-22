@@ -7,8 +7,8 @@
   # Variáveis de Conexão (Ajuste conforme seu ambiente)
   vars:
     ansible_network_os: community.network.cnos # Usado para o tipo de conexão VRP
-    ansible_user: "AlphaSoares"
-    ansible_password: "Soares99RS@"
+    #ansible_user: "User"
+    #ansible_password: "Pass"
     # Se precisar de modo privilegiado (enable) para executar o comando:
     # ansible_become: yes
     # ansible_become_method: enable
@@ -20,7 +20,7 @@
     - name: 📊 Executar 'display interface transceiver verbose'
       ansible.netcommon.cli_command:
         # 'command' é um argumento do módulo, indentado corretamente
-        command: display interface transceiver verbose
+        command: display transceiver interface
       # 'register' é uma chave da task, alinhada com o módulo e o 'name'
       register: optical_output 
       
