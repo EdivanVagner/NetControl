@@ -8,10 +8,10 @@
   vars:
     ansible_network_os: community.network.cnos # Usado para o tipo de conexão VRP
     ansible_user: AlphaSoares
-    ansible_password: "sua_senha"
-    ansible_become: yes
-    ansible_become_method: enable # Para entrar em modo privilegiado, se necessário
-    ansible_become_pass: "sua_senha_enable"
+    ansible_password: Soares99RS@
+   ## ansible_become: yes
+   ## ansible_become_method: enable # Para entrar em modo privilegiado, se necessário
+   ## ansible_become_pass: "sua_senha_enable"
     
   tasks:
     - name: 📊 Executar 'display interface transceiver verbose'
