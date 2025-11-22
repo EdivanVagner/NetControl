@@ -7,8 +7,8 @@
   # Variáveis de Conexão (Ajuste conforme seu ambiente)
   vars:
     ansible_network_os: community.network.cnos
-    #ansible_user: "AlphaSoares"
-    #ansible_password: "Soares99RS@"
+    #ansible_user: "user"
+    #ansible_password: "pass"
     
   tasks:
     - name: 📊 Executar 'display interface transceiver verbose'
